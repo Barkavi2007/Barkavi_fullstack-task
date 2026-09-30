@@ -1,0 +1,499 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>2026 Festival Calendar</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            min-height: 100vh;
+            padding: 30px;
+        }
+
+        .calendar-container {
+            max-width: 1100px;
+            margin: auto;
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        button {
+            border: none;
+            background: #667eea;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background: #4c5fd5;
+        }
+
+        #monthYear {
+            font-size: 28px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .weekdays,
+        .days {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 6px;
+        }
+
+        .weekdays div {
+            background: #667eea;
+            color: white;
+            padding: 12px;
+            text-align: center;
+            font-weight: bold;
+            border-radius: 6px;
+        }
+
+        .day {
+            min-height: 90px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 8px;
+            position: relative;
+            background: #fafafa;
+        }
+
+        .day:hover {
+            background: #f0f0ff;
+            transform: scale(1.02);
+        }
+
+        .empty {
+            background: transparent;
+            border: none;
+        }
+
+        .date-number {
+            font-weight: bold;
+            font-size: 17px;
+        }
+
+        .festival {
+            background: #fff0d9;
+            border: 2px solid #f39c12;
+        }
+
+        .important {
+            background: #e8f5e9;
+            border: 2px solid #27ae60;
+        }
+
+        .today {
+            outline: 3px solid #e74c3c;
+        }
+
+        .event {
+            font-size: 11px;
+            margin-top: 7px;
+            line-height: 1.2;
+            font-weight: bold;
+            color: #444;
+        }
+
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .box {
+            width: 18px;
+            height: 18px;
+            border-radius: 4px;
+        }
+
+        .festival-box {
+            background: #fff0d9;
+            border: 2px solid #f39c12;
+        }
+
+        .important-box {
+            background: #e8f5e9;
+            border: 2px solid #27ae60;
+        }
+
+        .today-box {
+            border: 3px solid #e74c3c;
+        }
+
+        @media (max-width: 700px) {
+            body {
+                padding: 10px;
+            }
+
+            .calendar-container {
+                padding: 12px;
+            }
+
+            #monthYear {
+                font-size: 20px;
+            }
+
+            button {
+                padding: 8px 10px;
+                font-size: 14px;
+            }
+
+            .day {
+                min-height: 70px;
+                padding: 5px;
+            }
+
+            .event {
+                font-size: 9px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="calendar-container">
+
+    <h1>🇮🇳 2026 Indian Festival Calendar</h1>
+
+    <div class="header">
+        <button onclick="previousMonth()">❮ Previous</button>
+
+        <div id="monthYear"></div>
+
+        <button onclick="nextMonth()">Next ❯</button>
+    </div>
+
+    <div class="weekdays">
+        <div>Sun</div>
+        <div>Mon</div>
+        <div>Tue</div>
+        <div>Wed</div>
+        <div>Thu</div>
+        <div>Fri</div>
+        <div>Sat</div>
+    </div>
+
+    <div class="days" id="calendar"></div>
+
+    <div class="legend">
+        <div class="legend-item">
+            <div class="box festival-box"></div>
+            Festival
+        </div>
+
+        <div class="legend-item">
+            <div class="box important-box"></div>
+            Important Day
+        </div>
+
+        <div class="legend-item">
+            <div class="box today-box"></div>
+            Today
+        </div>
+    </div>
+
+</div>
+
+<script>
+
+    const year = 2026;
+
+    let currentMonth = 0;
+
+    /*
+        Dates are examples of major Indian festivals
+        and important days for 2026.
+    */
+
+    const events = {
+
+        "1-1": {
+            name: "New Year's Day",
+            type: "important"
+        },
+
+        "1-12": {
+            name: "National Youth Day",
+            type: "important"
+        },
+
+        "1-26": {
+            name: "Republic Day 🇮🇳",
+            type: "festival"
+        },
+
+        "2-14": {
+            name: "Valentine's Day",
+            type: "important"
+        },
+
+        "2-19": {
+            name: "Shivaji Jayanti",
+            type: "important"
+        },
+
+        "3-4": {
+            name: "Holi",
+            type: "festival"
+        },
+
+        "3-19": {
+            name: "Ugadi / Gudi Padwa",
+            type: "festival"
+        },
+
+        "3-20": {
+            name: "Eid al-Fitr*",
+            type: "festival"
+        },
+
+        "4-2": {
+            name: "Rama Navami",
+            type: "festival"
+        },
+
+        "4-3": {
+            name: "Good Friday",
+            type: "festival"
+        },
+
+        "4-14": {
+            name: "Tamil New Year / Ambedkar Jayanti",
+            type: "festival"
+        },
+
+        "5-1": {
+            name: "Labour Day",
+            type: "important"
+        },
+
+        "5-27": {
+            name: "Eid al-Adha*",
+            type: "festival"
+        },
+
+        "6-21": {
+            name: "International Yoga Day",
+            type: "important"
+        },
+
+        "7-16": {
+            name: "Muharram*",
+            type: "festival"
+        },
+
+        "8-15": {
+            name: "Independence Day 🇮🇳",
+            type: "festival"
+        },
+
+        "8-26": {
+            name: "Onam",
+            type: "festival"
+        },
+
+        "9-4": {
+            name: "Janmashtami",
+            type: "festival"
+        },
+
+        "9-14": {
+            name: "Ganesh Chaturthi",
+            type: "festival"
+        },
+
+        "10-2": {
+            name: "Gandhi Jayanti",
+            type: "important"
+        },
+
+        "10-20": {
+            name: "Dussehra",
+            type: "festival"
+        },
+
+        "11-8": {
+            name: "Diwali 🪔",
+            type: "festival"
+        },
+
+        "11-24": {
+            name: "Guru Nanak Jayanti",
+            type: "festival"
+        },
+
+        "12-25": {
+            name: "Christmas 🎄",
+            type: "festival"
+        }
+
+    };
+
+
+    function createCalendar() {
+
+        const calendar = document.getElementById("calendar");
+
+        const monthYear = document.getElementById("monthYear");
+
+        calendar.innerHTML = "";
+
+        const date = new Date(year, currentMonth, 1);
+
+        const monthName = date.toLocaleString("en-US", {
+            month: "long"
+        });
+
+        monthYear.innerText = monthName + " " + year;
+
+        const firstDay = date.getDay();
+
+        const daysInMonth =
+            new Date(year, currentMonth + 1, 0).getDate();
+
+
+        // Empty boxes before first day
+
+        for (let i = 0; i < firstDay; i++) {
+
+            const emptyDay = document.createElement("div");
+
+            emptyDay.classList.add("day", "empty");
+
+            calendar.appendChild(emptyDay);
+        }
+
+
+        // Create dates
+
+        for (let day = 1; day <= daysInMonth; day++) {
+
+            const dayBox = document.createElement("div");
+
+            dayBox.classList.add("day");
+
+
+            const dateNumber =
+                document.createElement("div");
+
+            dateNumber.classList.add("date-number");
+
+            dateNumber.innerText = day;
+
+
+            dayBox.appendChild(dateNumber);
+
+
+            // Event key
+
+            const key = (currentMonth + 1) + "-" + day;
+
+
+            if (events[key]) {
+
+                const event = events[key];
+
+                dayBox.classList.add(event.type);
+
+
+                const eventText =
+                    document.createElement("div");
+
+                eventText.classList.add("event");
+
+                eventText.innerText = event.name;
+
+                dayBox.appendChild(eventText);
+            }
+
+
+            // Highlight today's date
+
+            const today = new Date();
+
+            if (
+                today.getFullYear() === year &&
+                today.getMonth() === currentMonth &&
+                today.getDate() === day
+            ) {
+
+                dayBox.classList.add("today");
+            }
+
+
+            calendar.appendChild(dayBox);
+        }
+    }
+
+
+    function previousMonth() {
+
+        if (currentMonth > 0) {
+
+            currentMonth--;
+
+            createCalendar();
+        }
+    }
+
+
+    function nextMonth() {
+
+        if (currentMonth < 11) {
+
+            currentMonth++;
+
+            createCalendar();
+        }
+    }
+
+
+    // Load calendar
+
+    createCalendar();
+
+</script>
+
+</body>
+</html>
+```

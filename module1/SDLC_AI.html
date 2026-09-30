@@ -1,0 +1,2166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Based SDLC Program</title>
+
+
+    <style>
+
+        /* ==============================
+           GENERAL CSS
+        ============================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+
+        body {
+
+            background: linear-gradient(
+                135deg,
+                #141e30,
+                #243b55
+            );
+
+            color: white;
+
+            min-height: 100vh;
+
+        }
+
+
+        /* ==============================
+           HEADER
+        ============================== */
+
+        header {
+
+            background: rgba(0, 0, 0, 0.45);
+
+            padding: 25px;
+
+            text-align: center;
+
+        }
+
+
+        header h1 {
+
+            font-size: 35px;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        header p {
+
+            font-size: 17px;
+
+            color: #dddddd;
+
+        }
+
+
+        /* ==============================
+           MAIN CONTAINER
+        ============================== */
+
+        .container {
+
+            width: 90%;
+
+            max-width: 1100px;
+
+            margin: 30px auto;
+
+        }
+
+
+        /* ==============================
+           SEARCH SECTION
+        ============================== */
+
+        .search-box {
+
+            text-align: center;
+
+            margin-bottom: 30px;
+
+        }
+
+
+        .search-box h2 {
+
+            font-size: 28px;
+
+            margin-bottom: 18px;
+
+        }
+
+
+        .search-input {
+
+            width: 65%;
+
+            max-width: 650px;
+
+            padding: 15px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            font-size: 16px;
+
+            outline: none;
+
+        }
+
+
+        .search-button {
+
+            padding: 14px 22px;
+
+            margin-left: 5px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            background: #00c6ff;
+
+            color: white;
+
+            font-size: 16px;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+
+        }
+
+
+        .search-button:hover {
+
+            background: #0072ff;
+
+            transform: scale(1.05);
+
+        }
+
+
+        /* ==============================
+           SEARCH RESULT
+        ============================== */
+
+        #searchResult {
+
+            display: none;
+
+            margin: 25px auto;
+
+            max-width: 900px;
+
+            background: white;
+
+            color: #222222;
+
+            padding: 25px;
+
+            border-radius: 15px;
+
+            text-align: left;
+
+            line-height: 1.7;
+
+            box-shadow:
+                0 10px 25px rgba(0, 0, 0, 0.35);
+
+        }
+
+
+        #searchResult h3 {
+
+            color: #243b55;
+
+            margin-bottom: 12px;
+
+            font-size: 23px;
+
+        }
+
+
+        #searchResult p {
+
+            margin-bottom: 8px;
+
+        }
+
+
+        #searchResult ul {
+
+            margin-left: 25px;
+
+        }
+
+
+        /* ==============================
+           SDLC CARDS
+        ============================== */
+
+        .sdlc-container {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fit, minmax(220px, 1fr));
+
+            gap: 20px;
+
+        }
+
+
+        .phase {
+
+            background: white;
+
+            color: #222222;
+
+            padding: 20px;
+
+            border-radius: 15px;
+
+            text-align: center;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+
+            box-shadow:
+                0 8px 20px rgba(0, 0, 0, 0.3);
+
+        }
+
+
+        .phase:hover {
+
+            transform:
+                translateY(-8px)
+                scale(1.02);
+
+            box-shadow:
+                0 15px 30px rgba(0, 0, 0, 0.5);
+
+        }
+
+
+        .phase h2 {
+
+            color: #243b55;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .phase p {
+
+            font-size: 14px;
+
+            line-height: 1.5;
+
+        }
+
+
+        .number {
+
+            background: #243b55;
+
+            color: white;
+
+            width: 45px;
+
+            height: 45px;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            margin: 0 auto 15px;
+
+            font-size: 20px;
+
+            font-weight: bold;
+
+        }
+
+
+        /* ==============================
+           AI SECTION
+        ============================== */
+
+        .ai-section {
+
+            margin-top: 40px;
+
+            background:
+                rgba(255, 255, 255, 0.12);
+
+            padding: 30px;
+
+            border-radius: 20px;
+
+            text-align: center;
+
+            backdrop-filter: blur(10px);
+
+        }
+
+
+        .ai-section h2 {
+
+            margin-bottom: 15px;
+
+            font-size: 28px;
+
+        }
+
+
+        .ai-section > p {
+
+            margin-bottom: 20px;
+
+        }
+
+
+        select {
+
+            width: 70%;
+
+            max-width: 500px;
+
+            padding: 13px;
+
+            border-radius: 8px;
+
+            border: none;
+
+            font-size: 16px;
+
+            outline: none;
+
+        }
+
+
+        button {
+
+            padding: 12px 25px;
+
+            border: none;
+
+            border-radius: 8px;
+
+            background: #00c6ff;
+
+            color: white;
+
+            font-size: 16px;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+
+            margin: 5px;
+
+        }
+
+
+        button:hover {
+
+            background: #0072ff;
+
+            transform: scale(1.05);
+
+        }
+
+
+        /* ==============================
+           AI RECOMMENDATION RESULT
+        ============================== */
+
+        #result {
+
+            margin-top: 20px;
+
+            padding: 20px;
+
+            background: white;
+
+            color: #222222;
+
+            border-radius: 10px;
+
+            min-height: 70px;
+
+            line-height: 1.6;
+
+            text-align: left;
+
+        }
+
+
+        /* ==============================
+           AI TOOL
+        ============================== */
+
+        .ai-tool {
+
+            margin-top: 30px;
+
+            background:
+                rgba(0, 0, 0, 0.25);
+
+            padding: 25px;
+
+            border-radius: 15px;
+
+        }
+
+
+        .ai-tool h3 {
+
+            font-size: 24px;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .ai-tool p {
+
+            margin-bottom: 15px;
+
+        }
+
+
+        .ai-question {
+
+            width: 75%;
+
+            padding: 14px;
+
+            border: none;
+
+            border-radius: 8px;
+
+            font-size: 16px;
+
+            outline: none;
+
+        }
+
+
+        #aiAnswer {
+
+            margin-top: 20px;
+
+            background: white;
+
+            color: #222222;
+
+            padding: 20px;
+
+            border-radius: 10px;
+
+            text-align: left;
+
+            min-height: 70px;
+
+            line-height: 1.6;
+
+        }
+
+
+        /* ==============================
+           FOOTER
+        ============================== */
+
+        footer {
+
+            margin-top: 40px;
+
+            text-align: center;
+
+            padding: 20px;
+
+            background:
+                rgba(0, 0, 0, 0.4);
+
+            color: #dddddd;
+
+        }
+
+
+        /* ==============================
+           RESPONSIVE DESIGN
+        ============================== */
+
+        @media (max-width: 700px) {
+
+            header h1 {
+
+                font-size: 25px;
+
+            }
+
+
+            .container {
+
+                width: 95%;
+
+            }
+
+
+            .search-input {
+
+                width: 100%;
+
+                margin-bottom: 10px;
+
+            }
+
+
+            .search-button {
+
+                width: 45%;
+
+                margin: 5px;
+
+            }
+
+
+            select {
+
+                width: 100%;
+
+            }
+
+
+            .ai-question {
+
+                width: 100%;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ==============================
+         HEADER
+    ============================== -->
+
+    <header>
+
+        <h1>
+            🤖 AI Based Software Development Life Cycle
+        </h1>
+
+        <p>
+            Using HTML5, CSS3 and Artificial Intelligence Concepts
+        </p>
+
+    </header>
+
+
+
+    <main class="container">
+
+
+        <!-- ==============================
+             SEARCH
+        ============================== -->
+
+        <section class="search-box">
+
+            <h2>
+                🔍 Search SDLC / Project
+            </h2>
+
+
+            <input
+                type="text"
+                id="searchInput"
+                class="search-input"
+                placeholder="Try: Hospital Management, Testing, AI..."
+            >
+
+
+            <button
+                class="search-button"
+                onclick="searchPhase()">
+
+                🔍 Search
+
+            </button>
+
+
+            <button
+                class="search-button"
+                onclick="clearSearch()">
+
+                ❌ Clear
+
+            </button>
+
+
+            <!-- SEARCH RESULT -->
+
+            <div id="searchResult"></div>
+
+        </section>
+
+
+
+        <!-- ==============================
+             SDLC PHASES
+        ============================== -->
+
+        <section>
+
+            <div class="sdlc-container">
+
+
+                <!-- PLANNING -->
+
+                <article
+                    class="phase"
+                    data-name="planning">
+
+                    <div class="number">
+                        1
+                    </div>
+
+                    <h2>
+                        Planning
+                    </h2>
+
+                    <p>
+                        Identify project goals,
+                        requirements, resources,
+                        budget and timeline.
+                    </p>
+
+                </article>
+
+
+
+                <!-- ANALYSIS -->
+
+                <article
+                    class="phase"
+                    data-name="analysis">
+
+                    <div class="number">
+                        2
+                    </div>
+
+                    <h2>
+                        Analysis
+                    </h2>
+
+                    <p>
+                        Analyze customer requirements
+                        and understand system needs.
+                    </p>
+
+                </article>
+
+
+
+                <!-- DESIGN -->
+
+                <article
+                    class="phase"
+                    data-name="design">
+
+                    <div class="number">
+                        3
+                    </div>
+
+                    <h2>
+                        Design
+                    </h2>
+
+                    <p>
+                        Create system architecture,
+                        database design and
+                        user interface structure.
+                    </p>
+
+                </article>
+
+
+
+                <!-- DEVELOPMENT -->
+
+                <article
+                    class="phase"
+                    data-name="development">
+
+                    <div class="number">
+                        4
+                    </div>
+
+                    <h2>
+                        Development
+                    </h2>
+
+                    <p>
+                        Developers write program code
+                        according to the system design.
+                    </p>
+
+                </article>
+
+
+
+                <!-- TESTING -->
+
+                <article
+                    class="phase"
+                    data-name="testing">
+
+                    <div class="number">
+                        5
+                    </div>
+
+                    <h2>
+                        Testing
+                    </h2>
+
+                    <p>
+                        Test the application to identify
+                        and fix bugs and errors.
+                    </p>
+
+                </article>
+
+
+
+                <!-- DEPLOYMENT -->
+
+                <article
+                    class="phase"
+                    data-name="deployment">
+
+                    <div class="number">
+                        6
+                    </div>
+
+                    <h2>
+                        Deployment
+                    </h2>
+
+                    <p>
+                        The completed software is released
+                        and made available to users.
+                    </p>
+
+                </article>
+
+
+
+                <!-- MAINTENANCE -->
+
+                <article
+                    class="phase"
+                    data-name="maintenance">
+
+                    <div class="number">
+                        7
+                    </div>
+
+                    <h2>
+                        Maintenance
+                    </h2>
+
+                    <p>
+                        Monitor the application,
+                        fix issues and add
+                        future improvements.
+                    </p>
+
+                </article>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ==============================
+             AI SDLC ASSISTANT
+        ============================== -->
+
+        <section class="ai-section">
+
+
+            <h2>
+                🤖 AI SDLC Assistant
+            </h2>
+
+
+            <p>
+                Select an SDLC phase and get an AI-based recommendation.
+            </p>
+
+
+
+            <select id="phase">
+
+                <option value="">
+                    -- Select SDLC Phase --
+                </option>
+
+                <option value="planning">
+                    Planning
+                </option>
+
+                <option value="analysis">
+                    Analysis
+                </option>
+
+                <option value="design">
+                    Design
+                </option>
+
+                <option value="development">
+                    Development
+                </option>
+
+                <option value="testing">
+                    Testing
+                </option>
+
+                <option value="deployment">
+                    Deployment
+                </option>
+
+                <option value="maintenance">
+                    Maintenance
+                </option>
+
+            </select>
+
+
+            <br>
+
+
+            <button
+                onclick="getAIRecommendation()">
+
+                🤖 Get AI Recommendation
+
+            </button>
+
+
+
+            <div id="result">
+
+                AI recommendation will appear here.
+
+            </div>
+
+
+
+            <!-- ==============================
+                 AI TOOL
+            ============================== -->
+
+            <div class="ai-tool">
+
+
+                <h3>
+                    🧠 AI Tool
+                </h3>
+
+
+                <p>
+                    Ask a question about SDLC or a project.
+                </p>
+
+
+                <input
+                    type="text"
+                    id="aiQuestion"
+                    class="ai-question"
+                    placeholder="Example: What is testing in SDLC?"
+                >
+
+
+                <br>
+
+
+                <button
+                    onclick="askAI()">
+
+                    🤖 Ask AI
+
+                </button>
+
+
+
+                <div id="aiAnswer">
+
+                    AI answer will appear here.
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- ==============================
+         FOOTER
+    ============================== -->
+
+    <footer>
+
+        <p>
+            © 2026 AI Based SDLC Project |
+            HTML5 + CSS3 + AI
+        </p>
+
+    </footer>
+
+
+
+    <script>
+
+
+        /* =====================================================
+           SEARCH FUNCTION
+        ===================================================== */
+
+        function searchPhase() {
+
+
+            let searchInput =
+                document.getElementById("searchInput");
+
+
+            let search =
+                searchInput.value
+                .toLowerCase()
+                .trim();
+
+
+            let phases =
+                document.querySelectorAll(".phase");
+
+
+            let searchResult =
+                document.getElementById("searchResult");
+
+
+            /* EMPTY SEARCH */
+
+            if (search === "") {
+
+                alert(
+                    "Please enter something to search."
+                );
+
+                return;
+
+            }
+
+
+            let foundPhase = false;
+
+
+            /*
+                SEARCH SDLC PHASES
+            */
+
+            phases.forEach(function(phase) {
+
+
+                let phaseName =
+                    phase
+                    .getAttribute("data-name")
+                    .toLowerCase();
+
+
+                let phaseText =
+                    phase.innerText
+                    .toLowerCase();
+
+
+                if (
+                    phaseName.includes(search) ||
+                    phaseText.includes(search)
+                ) {
+
+                    phase.style.display = "block";
+
+                    foundPhase = true;
+
+                }
+
+                else {
+
+                    phase.style.display = "none";
+
+                }
+
+            });
+
+
+
+            /*
+                IF SDLC PHASE IS FOUND
+            */
+
+            if (foundPhase) {
+
+
+                searchResult.style.display =
+                    "block";
+
+
+                searchResult.innerHTML =
+
+                    "<h3>🔍 SDLC Search Result</h3>" +
+
+                    "<p>" +
+
+                    "The SDLC phase related to " +
+
+                    "<b>" +
+
+                    searchInput.value +
+
+                    "</b> has been found above." +
+
+                    "</p>";
+
+
+                return;
+
+            }
+
+
+
+            /*
+                PROJECT SEARCH
+            */
+
+            let answer = "";
+
+
+
+            /* ==========================================
+               HOSPITAL MANAGEMENT
+            ========================================== */
+
+            if (
+
+                search.includes("hospital") ||
+
+                search.includes("healthcare") ||
+
+                search.includes("hospital management")
+
+            ) {
+
+
+                answer =
+
+                    "<h3>" +
+
+                    "🤖 AI Result: Hospital Management System" +
+
+                    "</h3>" +
+
+
+                    "<p>" +
+
+                    "<b>Project:</b> " +
+
+                    "Hospital Management System" +
+
+                    "</p>" +
+
+
+                    "<p>" +
+
+                    "<b>SDLC Approach:</b> " +
+
+                    "Planning → Analysis → Design → " +
+
+                    "Development → Testing → Deployment → " +
+
+                    "Maintenance." +
+
+                    "</p>" +
+
+
+                    "<p>" +
+
+                    "<b>AI Usage:</b> " +
+
+                    "AI can help analyze patient data, " +
+
+                    "assist with appointment management, " +
+
+                    "predict possible risks and automate " +
+
+                    "hospital workflows." +
+
+                    "</p>" +
+
+
+                    "<p>" +
+
+                    "<b>Suggested Modules:</b> " +
+
+                    "Patient Management, Doctor Management, " +
+
+                    "Appointment Management, Billing, " +
+
+                    "Pharmacy and Medical Records." +
+
+                    "</p>";
+
+            }
+
+
+
+            /* ==========================================
+               LIBRARY MANAGEMENT
+            ========================================== */
+
+            else if (
+
+                search.includes("library")
+
+            ) {
+
+
+                answer =
+
+                    "<h3>" +
+
+                    "🤖 AI Result: Library Management System" +
+
+                    "</h3>" +
+
+
+                    "<p>" +
+
+                    "<b>Project:</b> " +
+
+                    "Library Management System" +
+
+                    "</p>" +
+
+
+                    "<p>" +
+
+                    "<b>AI Usage:</b> " +
+
+                    "AI can recommend books based on " +
+
+                    "user interests and borrowing history." +
+
+                    "</p>" +
+
+
+                    "<p>" +
+
+                    "<b>Modules:</b> " +
+
+                    "Student Management, Book Management, " +
+
+                    "Issue and Return, Search and Fine Management." +
+
+                    "</p>";
+
+            }
+
+
+
+            /* ==========================================
+               ONLINE SHOPPING
+            ========================================== */
+
+            else if (
+
+                search.includes("shopping") ||
+
+                search.includes("ecommerce") ||
+
+                search.includes("e-commerce") ||
+
+                search.includes("online shopping")
+
+            ) {
+
+
+                answer =
+
+                    "<h3>" +
+
+                    "🤖 AI Result: Online Shopping System" +
+
+                    "</h3>" +
+
+
+                    "<p>" +
+
+                    "<b>Project:</b> " +
+
+                    "Online Shopping System" +
+
+                    "</p>" +
+
+
+                    "<p>" +
+
+                    "<b>AI Usage:</b> " +
+
+                    "AI can recommend products, analyze " +
+
+                    "customer behavior and provide " +
+
+                    "intelligent product search." +
+
+                    "</p>" +
+
+
+                    "<p>" +
+
+                    "<b>Modules:</b> " +
+
+                    "Products, Users, Cart, Orders, " +
+
+                    "Payment and Recommendation System." +
+
+                    "</p>";
+
+            }
+
+
+
+            /* ==========================================
+               STUDENT MANAGEMENT
+            ========================================== */
+
+            else if (
+
+                search.includes("student") ||
+
+                search.includes("college")
+
+            ) {
+
+
+                answer =
+
+                    "<h3>" +
+
+                    "🤖 AI Result: Student Management System" +
+
+                    "</h3>" +
+
+
+                    "<p>" +
+
+                    "<b>Project:</b> " +
+
+                    "Student Management System" +
+
+                    "</p>" +
+
+
+                    "<p>" +
+
+                    "<b>AI Usage:</b> " +
+
+                    "AI can analyze student performance " +
+
+                    "and provide learning recommendations." +
+
+                    "</p>" +
+
+
+                    "<p>" +
+
+                    "<b>Modules:</b> " +
+
+                    "Student Details, Attendance, Marks, " +
+
+                    "Courses and Performance Analysis." +
+
+                    "</p>";
+
+            }
+
+
+
+            /* ==========================================
+               AI SEARCH
+            ========================================== */
+
+            else if (
+
+                search === "ai" ||
+
+                search.includes("artificial intelligence") ||
+
+                search.includes("ai in sdlc")
+
+            ) {
+
+
+                answer =
+
+                    "<h3>" +
+
+                    "🤖 AI in SDLC" +
+
+                    "</h3>" +
+
+
+                    "<p>" +
+
+                    "Artificial Intelligence can support " +
+
+                    "different phases of SDLC." +
+
+                    "</p>" +
+
+
+                    "<p><b>Planning:</b> " +
+
+                    "Predict project risks.</p>" +
+
+
+                    "<p><b>Analysis:</b> " +
+
+                    "Analyze requirements.</p>" +
+
+
+                    "<p><b>Design:</b> " +
+
+                    "Suggest system architecture.</p>" +
+
+
+                    "<p><b>Development:</b> " +
+
+                    "Generate code suggestions.</p>" +
+
+
+                    "<p><b>Testing:</b> " +
+
+                    "Generate test cases and identify bugs.</p>" +
+
+
+                    "<p><b>Deployment:</b> " +
+
+                    "Monitor application performance.</p>" +
+
+
+                    "<p><b>Maintenance:</b> " +
+
+                    "Predict failures and suggest improvements.</p>";
+
+            }
+
+
+
+            /* ==========================================
+               UNKNOWN SEARCH
+            ========================================== */
+
+            else {
+
+
+                answer =
+
+                    "<h3>" +
+
+                    "🤖 AI Search Result" +
+
+                    "</h3>" +
+
+
+                    "<p>" +
+
+                    "No specific result was found for " +
+
+                    "<b>" +
+
+                    searchInput.value +
+
+                    "</b>." +
+
+                    "</p>" +
+
+
+                    "<p>" +
+
+                    "Try searching for:" +
+
+                    "</p>" +
+
+
+                    "<ul>" +
+
+                    "<li>Hospital Management</li>" +
+
+                    "<li>Library Management</li>" +
+
+                    "<li>Student Management</li>" +
+
+                    "<li>Online Shopping</li>" +
+
+                    "<li>AI in SDLC</li>" +
+
+                    "<li>Planning</li>" +
+
+                    "<li>Testing</li>" +
+
+                    "<li>Development</li>" +
+
+                    "</ul>";
+
+            }
+
+
+
+            /*
+                DISPLAY SEARCH RESULT
+            */
+
+            searchResult.style.display =
+                "block";
+
+
+            searchResult.innerHTML =
+                answer;
+
+
+            /*
+                SCROLL TO RESULT
+            */
+
+            searchResult.scrollIntoView({
+                behavior: "smooth",
+                block: "center"
+            });
+
+        }
+
+
+
+        /* =====================================================
+           CLEAR SEARCH
+        ===================================================== */
+
+        function clearSearch() {
+
+
+            document.getElementById(
+                "searchInput"
+            ).value = "";
+
+
+            document.getElementById(
+                "searchResult"
+            ).style.display = "none";
+
+
+            let phases =
+                document.querySelectorAll(".phase");
+
+
+            phases.forEach(function(phase) {
+
+                phase.style.display = "block";
+
+            });
+
+        }
+
+
+
+        /* =====================================================
+           AI RECOMMENDATION
+        ===================================================== */
+
+        function getAIRecommendation() {
+
+
+            let phase =
+                document.getElementById(
+                    "phase"
+                ).value;
+
+
+            let result =
+                document.getElementById(
+                    "result"
+                );
+
+
+            let recommendation = "";
+
+
+
+            /* PLANNING */
+
+            if (phase === "planning") {
+
+
+                recommendation =
+
+                    "🤖 <b>AI Recommendation:</b><br>" +
+
+                    "Define clear project goals, " +
+
+                    "estimate resources, identify risks " +
+
+                    "and create a realistic project timeline.";
+
+            }
+
+
+
+            /* ANALYSIS */
+
+            else if (phase === "analysis") {
+
+
+                recommendation =
+
+                    "🤖 <b>AI Recommendation:</b><br>" +
+
+                    "Use AI to analyze user requirements " +
+
+                    "and identify missing, duplicate or " +
+
+                    "conflicting requirements.";
+
+            }
+
+
+
+            /* DESIGN */
+
+            else if (phase === "design") {
+
+
+                recommendation =
+
+                    "🤖 <b>AI Recommendation:</b><br>" +
+
+                    "Create a scalable architecture and " +
+
+                    "use AI-assisted tools to improve UI, " +
+
+                    "database and system design.";
+
+            }
+
+
+
+            /* DEVELOPMENT */
+
+            else if (phase === "development") {
+
+
+                recommendation =
+
+                    "🤖 <b>AI Recommendation:</b><br>" +
+
+                    "Use AI coding assistants to generate " +
+
+                    "code suggestions, detect errors " +
+
+                    "and improve code quality.";
+
+            }
+
+
+
+            /* TESTING */
+
+            else if (phase === "testing") {
+
+
+                recommendation =
+
+                    "🤖 <b>AI Recommendation:</b><br>" +
+
+                    "Use AI-based testing to generate " +
+
+                    "test cases, identify bugs and " +
+
+                    "predict possible failures.";
+
+            }
+
+
+
+            /* DEPLOYMENT */
+
+            else if (phase === "deployment") {
+
+
+                recommendation =
+
+                    "🤖 <b>AI Recommendation:</b><br>" +
+
+                    "Monitor application performance " +
+
+                    "and use AI to detect unusual " +
+
+                    "system behavior.";
+
+            }
+
+
+
+            /* MAINTENANCE */
+
+            else if (phase === "maintenance") {
+
+
+                recommendation =
+
+                    "🤖 <b>AI Recommendation:</b><br>" +
+
+                    "Analyze application logs and " +
+
+                    "user feedback to identify problems " +
+
+                    "and suggest future improvements.";
+
+            }
+
+
+
+            /* EMPTY */
+
+            else {
+
+
+                recommendation =
+
+                    "⚠️ Please select an SDLC phase.";
+
+            }
+
+
+
+            result.innerHTML =
+                recommendation;
+
+        }
+
+
+
+        /* =====================================================
+           AI TOOL
+        ===================================================== */
+
+        function askAI() {
+
+
+            let question =
+
+                document.getElementById(
+                    "aiQuestion"
+                )
+                .value
+                .toLowerCase()
+                .trim();
+
+
+            let answer =
+
+                document.getElementById(
+                    "aiAnswer"
+                );
+
+
+
+            /* EMPTY QUESTION */
+
+            if (question === "") {
+
+
+                answer.innerHTML =
+
+                    "⚠️ Please enter a question.";
+
+                return;
+
+            }
+
+
+
+            /* ==========================================
+               SDLC
+            ========================================== */
+
+            if (
+
+                question.includes("sdlc") ||
+
+                question.includes("software development life cycle")
+
+            ) {
+
+
+                answer.innerHTML =
+
+                    "🤖 <b>AI Answer:</b><br>" +
+
+                    "SDLC stands for Software Development " +
+
+                    "Life Cycle. The main phases are " +
+
+                    "Planning, Analysis, Design, Development, " +
+
+                    "Testing, Deployment and Maintenance.";
+
+            }
+
+
+
+            /* ==========================================
+               PLANNING
+            ========================================== */
+
+            else if (
+
+                question.includes("planning")
+
+            ) {
+
+
+                answer.innerHTML =
+
+                    "🤖 <b>AI Answer:</b><br>" +
+
+                    "Planning is the first phase of SDLC. " +
+
+                    "It identifies project goals, resources, " +
+
+                    "budget, risks and timeline.";
+
+            }
+
+
+
+            /* ==========================================
+               ANALYSIS
+            ========================================== */
+
+            else if (
+
+                question.includes("analysis")
+
+            ) {
+
+
+                answer.innerHTML =
+
+                    "🤖 <b>AI Answer:</b><br>" +
+
+                    "Analysis focuses on understanding " +
+
+                    "customer requirements and defining " +
+
+                    "what the software should do.";
+
+            }
+
+
+
+            /* ==========================================
+               DESIGN
+            ========================================== */
+
+            else if (
+
+                question.includes("design")
+
+            ) {
+
+
+                answer.innerHTML =
+
+                    "🤖 <b>AI Answer:</b><br>" +
+
+                    "Design defines the system architecture, " +
+
+                    "database, modules, user interface and " +
+
+                    "overall technical structure.";
+
+            }
+
+
+
+            /* ==========================================
+               DEVELOPMENT
+            ========================================== */
+
+            else if (
+
+                question.includes("development") ||
+
+                question.includes("coding") ||
+
+                question.includes("code")
+
+            ) {
+
+
+                answer.innerHTML =
+
+                    "🤖 <b>AI Answer:</b><br>" +
+
+                    "Development is the phase where " +
+
+                    "programmers write the actual software " +
+
+                    "code based on the system design.";
+
+            }
+
+
+
+            /* ==========================================
+               TESTING
+            ========================================== */
+
+            else if (
+
+                question.includes("testing") ||
+
+                question.includes("test") ||
+
+                question.includes("bug")
+
+            ) {
+
+
+                answer.innerHTML =
+
+                    "🤖 <b>AI Answer:</b><br>" +
+
+                    "Testing checks the software for bugs " +
+
+                    "and errors. AI can help generate test " +
+
+                    "cases and identify possible failures.";
+
+            }
+
+
+
+            /* ==========================================
+               DEPLOYMENT
+            ========================================== */
+
+            else if (
+
+                question.includes("deployment") ||
+
+                question.includes("deploy")
+
+            ) {
+
+
+                answer.innerHTML =
+
+                    "🤖 <b>AI Answer:</b><br>" +
+
+                    "Deployment is the process of releasing " +
+
+                    "the completed software so that users " +
+
+                    "can access it.";
+
+            }
+
+
+
+            /* ==========================================
+               MAINTENANCE
+            ========================================== */
+
+            else if (
+
+                question.includes("maintenance") ||
+
+                question.includes("maintain")
+
+            ) {
+
+
+                answer.innerHTML =
+
+                    "🤖 <b>AI Answer:</b><br>" +
+
+                    "Maintenance involves monitoring the " +
+
+                    "software, fixing issues and adding " +
+
+                    "improvements after deployment.";
+
+            }
+
+
+
+            /* ==========================================
+               HOSPITAL
+            ========================================== */
+
+            else if (
+
+                question.includes("hospital") ||
+
+                question.includes("healthcare")
+
+            ) {
+
+
+                answer.innerHTML =
+
+                    "🤖 <b>AI Answer:</b><br>" +
+
+                    "A Hospital Management System can " +
+
+                    "manage patients, doctors, appointments, " +
+
+                    "billing, pharmacy and medical records. " +
+
+                    "AI can help analyze data and automate " +
+
+                    "some hospital workflows.";
+
+            }
+
+
+
+            /* ==========================================
+               LIBRARY
+            ========================================== */
+
+            else if (
+
+                question.includes("library")
+
+            ) {
+
+
+                answer.innerHTML =
+
+                    "🤖 <b>AI Answer:</b><br>" +
+
+                    "A Library Management System manages " +
+
+                    "books, students, issue and return " +
+
+                    "operations, searches and fines. " +
+
+                    "AI can recommend books to users.";
+
+            }
+
+
+
+            /* ==========================================
+               STUDENT
+            ========================================== */
+
+            else if (
+
+                question.includes("student")
+
+            ) {
+
+
+                answer.innerHTML =
+
+                    "🤖 <b>AI Answer:</b><br>" +
+
+                    "A Student Management System can manage " +
+
+                    "student details, attendance, marks, " +
+
+                    "courses and performance. AI can analyze " +
+
+                    "student performance and provide recommendations.";
+
+            }
+
+
+
+            /* ==========================================
+               SHOPPING
+            ========================================== */
+
+            else if (
+
+                question.includes("shopping") ||
+
+                question.includes("ecommerce") ||
+
+                question.includes("e-commerce")
+
+            ) {
+
+
+                answer.innerHTML =
+
+                    "🤖 <b>AI Answer:</b><br>" +
+
+                    "An Online Shopping System can manage " +
+
+                    "products, users, cart, orders and payments. " +
+
+                    "AI can provide product recommendations " +
+
+                    "and intelligent search.";
+
+            }
+
+
+
+            /* ==========================================
+               UNKNOWN QUESTION
+            ========================================== */
+
+            else {
+
+
+                answer.innerHTML =
+
+                    "🤖 <b>AI Answer:</b><br>" +
+
+                    "I can currently answer questions about " +
+
+                    "SDLC and common software projects.<br><br>" +
+
+                    "<b>Try:</b><br>" +
+
+                    "• What is SDLC?<br>" +
+
+                    "• What is testing?<br>" +
+
+                    "• What is planning?<br>" +
+
+                    "• What is development?<br>" +
+
+                    "• What is Hospital Management System?";
+
+            }
+
+
+            /*
+                SCROLL TO ANSWER
+            */
+
+            answer.scrollIntoView({
+                behavior: "smooth",
+                block: "center"
+            });
+
+        }
+
+
+
+        /* =====================================================
+           ENTER KEY - SEARCH
+        ===================================================== */
+
+        document
+            .getElementById("searchInput")
+            .addEventListener(
+                "keypress",
+                function(event) {
+
+                    if (event.key === "Enter") {
+
+                        searchPhase();
+
+                    }
+
+                }
+            );
+
+
+
+        /* =====================================================
+           ENTER KEY - AI TOOL
+        ===================================================== */
+
+        document
+            .getElementById("aiQuestion")
+            .addEventListener(
+                "keypress",
+                function(event) {
+
+                    if (event.key === "Enter") {
+
+                        askAI();
+
+                    }
+
+                }
+            );
+
+
+    </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI SDLC Generator</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+
+            min-height: 100vh;
+
+            background: linear-gradient(
+                135deg,
+                #141E30,
+                #243B55
+            );
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 30px;
+        }
+
+        .container {
+            width: 700px;
+
+            background: white;
+
+            padding: 30px;
+
+            border-radius: 20px;
+
+            box-shadow:
+                0 10px 30px rgba(0,0,0,0.3);
+
+            text-align: center;
+        }
+
+        h1 {
+            color: #6C63FF;
+
+            margin-bottom: 10px;
+
+            font-size: 32px;
+        }
+
+        .subtitle {
+            color: #666;
+
+            margin-bottom: 25px;
+        }
+
+        .input-box {
+            display: flex;
+
+            gap: 10px;
+
+            justify-content: center;
+
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 70%;
+
+            padding: 14px;
+
+            border: 2px solid #6C63FF;
+
+            border-radius: 10px;
+
+            font-size: 16px;
+
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #FF6584;
+        }
+
+        button {
+            padding: 14px 20px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            background: linear-gradient(
+                135deg,
+                #6C63FF,
+                #8E54E9
+            );
+
+            color: white;
+
+            font-size: 15px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 5px 15px rgba(108,99,255,0.4);
+        }
+
+        #result {
+            margin-top: 20px;
+
+            padding: 20px;
+
+            background: #F8F7FF;
+
+            border-radius: 15px;
+
+            border: 2px solid #D8D5FF;
+
+            text-align: left;
+        }
+
+        #result h2 {
+            color: #6C63FF;
+
+            text-align: center;
+
+            margin-bottom: 20px;
+        }
+
+        .step {
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+
+            background: white;
+
+            padding: 15px;
+
+            margin: 12px 0;
+
+            border-radius: 10px;
+
+            border-left: 5px solid #6C63FF;
+
+            box-shadow:
+                0 3px 8px rgba(0,0,0,0.08);
+        }
+
+        .icon {
+            font-size: 28px;
+
+            min-width: 45px;
+
+            text-align: center;
+        }
+
+        .step h3 {
+            color: #333;
+
+            margin-bottom: 5px;
+        }
+
+        .step p {
+            color: #666;
+
+            line-height: 1.5;
+        }
+
+        .error {
+            color: #e74c3c;
+
+            text-align: center;
+
+            font-weight: bold;
+        }
+
+        @media (max-width: 700px) {
+
+            .container {
+                width: 100%;
+            }
+
+            .input-box {
+                flex-direction: column;
+            }
+
+            input {
+                width: 100%;
+            }
+
+            button {
+                width: 100%;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+    <h1>🤖 AI SDLC Generator</h1>
+
+    <p class="subtitle">
+        Generate Software Development Life Cycle steps
+    </p>
+
+
+    <h3>📌 Enter Project Topic</h3>
+
+
+    <div class="input-box">
+
+        <input
+            type="text"
+            id="topic"
+            placeholder="Example: Hospital Management"
+        >
+
+        <button id="generateButton">
+            ✨ Generate SDLC
+        </button>
+
+    </div>
+
+
+    <div id="result">
+
+        <h2>🚀 Your SDLC will appear here</h2>
+
+    </div>
+
+
+</div>
+
+
+<script>
+
+    /* Get button */
+
+    const button =
+        document.getElementById("generateButton");
+
+
+    /* Add click event */
+
+    button.addEventListener("click", generateSDLC);
+
+
+    /* SDLC Function */
+
+    function generateSDLC() {
+
+        const topic =
+            document.getElementById("topic").value.trim();
+
+
+        /* Check empty input */
+
+        if (topic === "") {
+
+            document.getElementById("result").innerHTML =
+
+                "<p class='error'>" +
+                "⚠️ Please enter a project topic!" +
+                "</p>";
+
+            return;
+        }
+
+
+        /* Generate SDLC */
+
+        const result = document.getElementById("result");
+
+
+        result.innerHTML = `
+
+            <h2>🚀 SDLC for ${topic}</h2>
+
+
+            <div class="step">
+
+                <div class="icon">📋</div>
+
+                <div>
+
+                    <h3>1. Planning</h3>
+
+                    <p>
+                        Plan the ${topic} project,
+                        resources, budget, and timeline.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="step">
+
+                <div class="icon">🔍</div>
+
+                <div>
+
+                    <h3>2. Requirement Analysis</h3>
+
+                    <p>
+                        Collect and analyze user
+                        requirements for the ${topic} system.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="step">
+
+                <div class="icon">🎨</div>
+
+                <div>
+
+                    <h3>3. Design</h3>
+
+                    <p>
+                        Design the user interface,
+                        database, architecture, and workflow.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="step">
+
+                <div class="icon">💻</div>
+
+                <div>
+
+                    <h3>4. Development</h3>
+
+                    <p>
+                        Develop the ${topic} application
+                        using suitable programming languages
+                        and technologies.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="step">
+
+                <div class="icon">🧪</div>
+
+                <div>
+
+                    <h3>5. Testing</h3>
+
+                    <p>
+                        Test the ${topic} system,
+                        identify bugs, and fix errors.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="step">
+
+                <div class="icon">🚀</div>
+
+                <div>
+
+                    <h3>6. Deployment</h3>
+
+                    <p>
+                        Deploy the ${topic} system
+                        and make it available to users.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="step">
+
+                <div class="icon">🔧</div>
+
+                <div>
+
+                    <h3>7. Maintenance</h3>
+
+                    <p>
+                        Monitor, update, improve,
+                        and maintain the ${topic} system.
+                    </p>
+
+                </div>
+
+            </div>
+
+        `;
+
+    }
+
+</script>
+
+
+</body>
+
+</html>
